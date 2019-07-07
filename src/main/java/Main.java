@@ -1,6 +1,7 @@
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
 
@@ -25,11 +26,19 @@ public class Main {
             System.out.println("Connect to database successfully!");
             System.out.println("MongoDatabase inof is : "+mgdb.getName());
 
+            //获取集合
             MongoCollection<Document> c = mgdb.getCollection("user");
 
+            //插入数据
             Document d1 = new Document();
             d1.append("name", "javamike").append("sex", "male");
             c.insertOne(d1);
+
+            //修改数据
+            c.updateOne(Filters.eq("name", "javamike"), new Document("$set", new Document("name", "javamikes")));
+
+            //删除数据
+            c.deleteOne(Filters.eq("name", "javamikes"));
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
