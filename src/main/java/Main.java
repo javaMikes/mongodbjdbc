@@ -1,9 +1,4 @@
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import org.bson.Document;
-
+import com.javamike.opt.ClientOpt;
 
 /**
  * @author huangh
@@ -17,28 +12,19 @@ public class Main {
 
         try {
 
-            // To connect to mongodb server
-            MongoClient mongoClient = new MongoClient("47.107.170.100", 27017);
+            ClientOpt clientOpt = new ClientOpt();
 
-            // Now connect to your databases
-            MongoDatabase mgdb = mongoClient.getDatabase("javamike");
+            //增
+            clientOpt.add();
 
-            System.out.println("Connect to database successfully!");
-            System.out.println("MongoDatabase inof is : "+mgdb.getName());
+            //查
+            clientOpt.query();
 
-            //获取集合
-            MongoCollection<Document> c = mgdb.getCollection("user");
+            //修
+            clientOpt.update();
 
-            //插入数据
-            Document d1 = new Document();
-            d1.append("name", "javamike").append("sex", "male");
-            c.insertOne(d1);
-
-            //修改数据
-            c.updateOne(Filters.eq("name", "javamike"), new Document("$set", new Document("name", "javamikes")));
-
-            //删除数据
-            c.deleteOne(Filters.eq("name", "javamikes"));
+            //删
+            clientOpt.delete();
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
