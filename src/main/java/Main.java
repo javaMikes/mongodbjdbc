@@ -1,4 +1,5 @@
 import com.javamike.opt.ClientOpt;
+import com.javamike.opt.MorphiaOpt;
 
 /**
  * @author huangh
@@ -12,19 +13,22 @@ public class Main {
 
         try {
 
-            ClientOpt clientOpt = new ClientOpt();
+//            ClientOpt clientOpt = new ClientOpt();
+//
+//            //增
+//            clientOpt.add();
+//
+//            //查
+//            clientOpt.query();
+//
+//            //修
+//            clientOpt.update();
+//
+//            //删
+//            clientOpt.delete();
 
-            //增
-            clientOpt.add();
-
-            //查
-            clientOpt.query();
-
-            //修
-            clientOpt.update();
-
-            //删
-            clientOpt.delete();
+            MorphiaOpt morphiaOpt = new MorphiaOpt();
+            morphiaOpt.query();
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
